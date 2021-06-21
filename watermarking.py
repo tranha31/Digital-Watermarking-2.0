@@ -11,13 +11,6 @@ Y = 0
 Cb = 1
 Cr = 2
 
-#copy xâu base64 ở text vào để test nhé, sau có api thì gán nó sau ý
-#base64_string = 
-
-#mình đang để test thế nhé
-sign = "hellooooooooooooooooooooo"
-
-
 def inputImage(base64_string):
     imgdata = base64.b64decode(base64_string)
     image = im.open(io.BytesIO(imgdata))
@@ -144,21 +137,6 @@ def watermarking(L, sign):
       
         tmp = tmp + 1
     
-    digit = []
-    sign2 = ""
-    for i in range(len(sign)//7):
-        digit.append(int(sign[i*7:i*7+7],2))
-   
-    for i in range(len(digit)):
-        sign2 += chr(digit[i])
-        
-    conn = connect()
-    cursor = conn.cursor()
-    sql = "insert into sign(s) values('"+sign2+"')"
-    cursor.execute(sql)
-
-    conn.commit()
-    
     
 def pickWatermarking(L):
     sign1 = ""
@@ -214,7 +192,7 @@ def checkExistWatermarking(L):
             return "The picture dosen't have sign"
     conn = connect()
     cursor = conn.cursor()
-    sql = "select * from sign where s = '" + sign2 + "'"
+    sql = "select * from users where sign = '" + sign2 + "'"
     cursor.execute(sql)
     row = cursor.fetchone()
     if row is None:
@@ -249,7 +227,7 @@ def checkWM(D):
             return True
     conn = connect()
     cursor = conn.cursor()
-    sql = "select * from sign where s = '" + sign2 + "'"
+    sql = "select * from users where sign = '" + sign2 + "'"
     cursor.execute(sql)
     row = cursor.fetchone()
     if row is not None:
@@ -270,25 +248,29 @@ def outImage(x, y, z):
     return base64.b64encode(myimage)
 
 
+#Embedding watermarking 
+def embedWatermarking(base64_string, sign):
+    imYCbCr = inputImage(base64_string)
+    s = hexToBinary(sign)
+    L = dctYchanel(imYCbCr[:,:,Y])
+    if(checkWM(L)):
+        watermarking(L, s)
+        idctYchanel(imYCbCr[:,:,Y], L)
+        result = outImage(imYCbCr[:,:,Y], imYCbCr[:,:,Cb], imYCbCr[:,:,Cr])
+        return result
+    else:
+        return "Image was had sign"
+    
 
-#imYCbCr = inputImage(base64_string)
+#Check image has watermarking. Result is a text
+def checkImageWM(base64_string):
+    imYCbCr = inputImage(base64_string)
+    L = dctYchanel(imYCbCr[:,:,Y])
+    result = checkExistWatermarking(L)
+    return result
+    
 
-#s = hexToBinary(sign)
-  
-#L = dctYchanel(imYCbCr[:,:,Y])
 
-#if(checkWM(L)):
-    #watermarking(L, s)
-
-#test = pickWatermarking(L)
-#print(test)
-
-#idctYchanel(imYCbCr[:,:,Y], L)
-
-#tt = checkExistWatermarking(L)
-#print(tt)
-
-#im.fromarray(imYCbCr[:,:,Y], "L").show()
 
 
                
