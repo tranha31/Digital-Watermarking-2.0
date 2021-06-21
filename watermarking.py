@@ -3,38 +3,38 @@ from math import sqrt, cos, pi, floor
 import numpy as np
 from PIL import Image as im
 from mysql.connector import MySQLConnection, Error
+import io
+import base64
 
 K = 5
-image = im.open("socute.jpg")
-ycbcr = image.convert('YCbCr')
-
 Y = 0
 Cb = 1
 Cr = 2
 
-YCbCr=list(ycbcr.getdata()) # flat list of tuples
-# reshape
-imYCbCr = np.reshape(YCbCr, (image.size[1], image.size[0], 3))
-# Convert 32-bit elements to 8-bit
-imYCbCr = imYCbCr.astype(np.uint8)
+#copy xâu base64 ở text vào để test nhé, sau có api thì gán nó sau ý
+#base64_string = 
 
-# now, display the 3 channels
-#im.fromarray(imYCbCr[:,:,Y], "L").show()
-#im.fromarray(imYCbCr[:,:,Cb], "L").show()
-#im.fromarray(imYCbCr[:,:,Cr], "L").show()
-
-width, height = imYCbCr[:,:,Y].shape
-    
-#DCT = np.zeros((8,8))
-A1 = np.zeros((8,8))
+#mình đang để test thế nhé
 sign = "hellooooooooooooooooooooo"
-s = ""
+
+
+def inputImage(base64_string):
+    imgdata = base64.b64decode(base64_string)
+    image = im.open(io.BytesIO(imgdata))
+    ycbcr = image.convert('YCbCr')
+    
+
+    YCbCr=list(ycbcr.getdata()) # flat list of tuples
+    # reshape
+    imYCbCr = np.reshape(YCbCr, (image.size[1], image.size[0], 3))
+    # Convert 32-bit elements to 8-bit
+    imYCbCr = imYCbCr.astype(np.uint8)
+    return imYCbCr
+
 
 def hexToBinary(sign):
     a = ''.join(format(ord(x), 'b') for x in sign)
     return a
-
-s = hexToBinary(sign)
 
 def connect():
     db_config = {
@@ -127,7 +127,7 @@ def idctYchanel(Y, L):
 #always get point (5,2) and (4,3)
 def watermarking(L, sign):
     tmp = 0
-    print(sign)
+    #print(sign)
     for i in range(len(L)):
         D = L[i]
         if sign[tmp] == '0' and D[5][2] < D[4][3]:
@@ -143,7 +143,23 @@ def watermarking(L, sign):
         L[i] = D
       
         tmp = tmp + 1
+    
+    digit = []
+    sign2 = ""
+    for i in range(len(sign)//7):
+        digit.append(int(sign[i*7:i*7+7],2))
+   
+    for i in range(len(digit)):
+        sign2 += chr(digit[i])
+        
+    conn = connect()
+    cursor = conn.cursor()
+    sql = "insert into sign(s) values('"+sign2+"')"
+    cursor.execute(sql)
 
+    conn.commit()
+    
+    
 def pickWatermarking(L):
     sign1 = ""
     for i in range(len(L)):
@@ -168,6 +184,8 @@ def pickWatermarking(L):
             sign2 += chr(digit[i])
         else:
             return "The picture dosen't have sign"
+    
+    
     return sign2
 
 def checkExistWatermarking(L):
@@ -199,7 +217,7 @@ def checkExistWatermarking(L):
     sql = "select * from sign where s = '" + sign2 + "'"
     cursor.execute(sql)
     row = cursor.fetchone()
-    if row is not None:
+    if row is None:
         return "The picture dosen't have sign"
     else:
         return sign2
@@ -238,20 +256,41 @@ def checkWM(D):
         return False
     else:
         return True
-    
-        
-L = dctYchanel(imYCbCr[:,:,Y])
 
-if(checkWM(L)):
-    watermarking(L, s)
+# x is imYCbCr[:,:,Y], y is imYCbCr[:,:,Cb], z is imYCbCr[:,:,Cr]
+def outImage(x, y, z):
+    out_img_y = im.fromarray(x, "L")
+    out_img_cb = im.fromarray(y, "L")
+    out_img_cr = im.fromarray(z, "L")
+    out_img = im.merge('YCbCr', [out_img_y, out_img_cb, out_img_cr]).convert('RGB')
 
-test = pickWatermarking(L)
-print(test)
+    buffer = io.BytesIO()
+    out_img.save(buffer, format = "PNG")
+    myimage = buffer.getvalue()
+    return base64.b64encode(myimage)
 
-idctYchanel(imYCbCr[:,:,Y], L)
+
+
+#imYCbCr = inputImage(base64_string)
+
+#s = hexToBinary(sign)
+  
+#L = dctYchanel(imYCbCr[:,:,Y])
+
+#if(checkWM(L)):
+    #watermarking(L, s)
+
+#test = pickWatermarking(L)
+#print(test)
+
+#idctYchanel(imYCbCr[:,:,Y], L)
+
+#tt = checkExistWatermarking(L)
+#print(tt)
 
 #im.fromarray(imYCbCr[:,:,Y], "L").show()
-            
+
+
                
-            
+        
         
