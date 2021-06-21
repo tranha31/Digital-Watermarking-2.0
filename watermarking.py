@@ -243,9 +243,16 @@ def outImage(x, y, z):
     out_img = im.merge('YCbCr', [out_img_y, out_img_cb, out_img_cr]).convert('RGB')
 
     buffer = io.BytesIO()
-    out_img.save(buffer, format = "PNG")
+    out_img.save(buffer, format = "JPEG")
+    buffer.seek(0)
     myimage = buffer.getvalue()
-    return base64.b64encode(myimage)
+    t = base64.b64encode(myimage)
+    t = str(t)
+    t = t[2:]
+    t = t[:-1]
+    r = "data:image/jpeg;base64," + t
+    return r
+    #return "data:image/png;base64," + base64.b64encode(myimage)
 
 
 #Embedding watermarking 
@@ -256,6 +263,7 @@ def embedWatermarking(base64_string, sign):
     if(checkWM(L)):
         watermarking(L, s)
         idctYchanel(imYCbCr[:,:,Y], L)
+        #im.fromarray(imYCbCr[:,:,Y], "L").show()
         result = outImage(imYCbCr[:,:,Y], imYCbCr[:,:,Cb], imYCbCr[:,:,Cr])
         return result
     else:
@@ -269,7 +277,6 @@ def checkImageWM(base64_string):
     result = checkExistWatermarking(L)
     return result
     
-
 
 
 
