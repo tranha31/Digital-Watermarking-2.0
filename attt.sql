@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th6 20, 2021 lúc 09:03 PM
+-- Thời gian đã tạo: Th6 21, 2021 lúc 05:33 PM
 -- Phiên bản máy phục vụ: 10.4.18-MariaDB
 -- Phiên bản PHP: 8.0.3
 
@@ -24,29 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `sign`
+-- Cấu trúc bảng cho bảng `users`
 --
 
-CREATE TABLE `sign` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
-  `s` varchar(30) NOT NULL
+  `gmail` varchar(100) NOT NULL,
+  `name` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `sign` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Đang đổ dữ liệu cho bảng `sign`
---
-
-INSERT INTO `sign` (`id`, `s`) VALUES
-(1, 'ooooooooooooooooooooooooo');
 
 --
 -- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Chỉ mục cho bảng `sign`
+-- Chỉ mục cho bảng `users`
 --
-ALTER TABLE `sign`
+ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -54,10 +50,10 @@ ALTER TABLE `sign`
 --
 
 --
--- AUTO_INCREMENT cho bảng `sign`
+-- AUTO_INCREMENT cho bảng `users`
 --
-ALTER TABLE `sign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
