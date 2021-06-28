@@ -1,5 +1,19 @@
+<head>
+    <script src="/static/js/main.js"></script>
+</head>
+
 <body>
     <p>
         this is upload image page
     </p>
+    <input type="file" id="file" onchange="return fileValidate()">
+    <br>
+    <input type="text" size="25" placeholder="signature" id="signature">
+    <br>
+    <input type="submit" id="watermark" placeholder="watermark this image" onclick="watermarkImage()">
+    <div id="output-image"></div>
+    <br>
+    <div>
+        <img id="result-image" src="">
+    </div>
 </body>
