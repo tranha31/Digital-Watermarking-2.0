@@ -2,7 +2,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Log in to Trello</title>
+  <title>Log in</title>
   <link rel="stylesheet" href="/static/css/index.css">
 </head>
 
@@ -22,7 +22,7 @@
 
             <h1 class="sub-heading">Log in to your account</h1>
 
-              <form id="login-form" action="/home" method="POST">
+              <form id="login-form" action="/login" method="POST">
                 <div class="email-password">
                   <input type="text" name="user" id="user" class="form-field u" placeholder="Enter email" inputmode="email" onclick="hiddenErrorMessage()">
                   <input type="password" name="password" id="password" class="form-field u" placeholder="Enter password" onclick="hiddenErrorMessage()">
@@ -39,7 +39,7 @@
 
             <div class="bottom-form-link">
               <span><a class="forgotLink link" href="#" data-analytics-link="forgotPasswordLink">Can't log in?</a></span>
-              <span><a class="signupLink link" href="signup.html" data-analytics-link="signUpLoginLink">Sign up for an account</a></span>
+              <span><a class="signupLink link" href="/signup" data-analytics-link="signUpLoginLink">Sign up for an account</a></span>
             </div>
           </div>
           <div class="bottom-form-link smaller-links">
