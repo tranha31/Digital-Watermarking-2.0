@@ -18,7 +18,7 @@
 <body>
   <div class="header">
     <ul id='button-header' class="menu">
-      <li id='login-button' class="menu-li"><a href="/"> Login</a></li>
+      <li id='login-button' class="menu-li"><a href="/login"> Login</a></li>
       <li id='signup-button' class="menu-li"><a href="/signup"> Signup</a></li>
       <li id='logout-button' class="menu-li"><a href="/logout"> Logout</a></li>
     </ul>
@@ -49,7 +49,7 @@
 
     <div id="user-info">
       <h3 id='user-name'>Hi {{g.name}}</h3>
-      <h3 style="display: inline;">Your signature: </h3>
+      <h3 style="display: inline;">Your signature is </h3>
       <h3 id='signature' style="display: inline;">{{g.signature}}</h3>
     </div>
 
@@ -96,7 +96,7 @@
       <button class="watermark-btn" type="button" onclick="watermarkImage()"> Watermark </button>
     </div>
     <div class="hi" style="text-align: center;">
-      <button class="un-watermark-btn" type="button" onclick="">UnWatermark </button>
+      <button class="un-watermark-btn" type="button" onclick="getSignatureFromImage()">UnWatermark </button>
     </div>
 
     <div id="showimage">

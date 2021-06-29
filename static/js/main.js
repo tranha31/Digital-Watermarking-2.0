@@ -71,7 +71,7 @@ async function watermarkImage() {
             .then(data => {
                 console.log(data);
                 if (data.result == 'Image was had sign') {
-                    alert('Image was had sign');
+                    alert('Image already had a sign. Please try another');
                     return;
                 }
                 resultImage = data.result;
@@ -117,7 +117,7 @@ async function getSignatureFromImage() {
         alert("You must upload the image");
         return;
     } else {
-        await fetch("/signature", {
+        await fetch('/signature', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -126,9 +126,13 @@ async function getSignatureFromImage() {
                 base64: img.slice(subLen).toString()
             })
         })
-            .then(response => response.json())
-            .then(data => {
-                console.log("Your signature is " + data.result);
+            .then(function(response){
+                if(response.ok){
+                    data = response.json();
+                    console.log('your signature is  ' +  data.result);
+                }else{
+                    alert("This image doesn't have signature.");
+                }
             })
     }
 }

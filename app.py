@@ -6,7 +6,7 @@ import mysql.connector
 from flask import Flask, app, request, jsonify
 from flask import render_template, session, redirect, g
 from flask_restful import Resource, Api
-from watermarking import embedWatermarking
+from watermarking import embedWatermarking, checkImageWM
 
 app = Flask(__name__)
 app.secret_key = 'somesecretkeythatonlyishouldknow'
@@ -30,18 +30,17 @@ def before_request():
 
 @app.route('/')
 def hello_world():
-    return render_template('index.html')
+    return render_template('main.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     mycursor=mydb.cursor()
     if request.method=='POST':
-        session.pop('user_id', None) # !!!
+        session.pop('user_id', None)   # !!!
         signup = request.form
         username = signup['user']
         password = signup['password']
-        # print('username: ' + username + ' password: ' + password)
         query = "select * from users where gmail='{}' and password='{}'".format(username, password)
         print(query)
         mycursor.execute(query)
@@ -62,7 +61,7 @@ def login():
             mycursor.close()
             return render_template("index.html")
     else:
-        return None
+        return render_template('index.html')
 
 
 @app.route('/logout')
@@ -125,6 +124,20 @@ class WaterMarkImage(Resource):
 
 api.add_resource(WaterMarkImage, '/watermark')
 
+
+class GetSignature(Resource):
+    def post(self):
+        json_data = request.get_json(force=True)
+        base64_string = json_data['base64']
+        print('base 64 string image: {}'.format(base64_string))
+        result = checkImageWM(base64_string)
+        if result == "The image doesn't have any sign":
+            return "Signature not found", 404
+        else:
+            return jsonify(result=result)
+
+
+api.add_resource(GetSignature, '/signature')
 # main
 if __name__ == '__main__':
     app.run(debug=True)

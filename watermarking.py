@@ -32,10 +32,10 @@ def hexToBinary(sign):
 
 def connect():
     db_config = {
-        'host': 'localhost',
+        'host': '127.0.0.1',
         'database': 'attt',
         'user': 'root',
-        'password': ''
+        'password': '123456'
     }
     conn = None
     try:
@@ -251,14 +251,14 @@ def outImage(x, y, z):
     out_img = im.merge('YCbCr', [out_img_y, out_img_cb, out_img_cr]).convert('RGB')
 
     buffer = io.BytesIO()
-    out_img.save(buffer, format="JPEG")
+    out_img.save(buffer, format="PNG")
     buffer.seek(0)
     myimage = buffer.getvalue()
     t = base64.b64encode(myimage)
     t = str(t)
     t = t[2:]
     t = t[:-1]
-    r = "data:image/jpeg;base64," + t
+    r = "data:image/png;base64," + t
     return r
     # return "data:image/png;base64," + base64.b64encode(myimage)
 
@@ -284,9 +284,6 @@ def checkImageWM(base64_string):
     L = dctYchanel(imYCbCr[:, :, Y])
     result = checkExistWatermarking(L)
     return result
-
-
-
 
 
 
