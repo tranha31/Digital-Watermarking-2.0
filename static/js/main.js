@@ -126,11 +126,12 @@ async function getSignatureFromImage() {
                 base64: img.slice(subLen).toString()
             })
         })
-            .then(function(response){
-                if(response.ok){
-                    data = response.json();
-                    console.log('your signature is  ' +  data.result);
-                }else{
+            .then(function (response) {
+                if (response.ok) {
+                    response.json().then(data => {
+                        console.log('your signature is  ' + data.result);
+                    });
+                } else {
                     alert("This image doesn't have signature.");
                 }
             })
@@ -190,5 +191,3 @@ function checkLogIn() {
         document.getElementById('logout-button').style.display = 'none';
     }
 }
-
-checkLogIn();
