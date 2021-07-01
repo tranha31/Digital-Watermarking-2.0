@@ -7,7 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Main</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
   <link rel="stylesheet" href="/static/css/main.css">
   <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
   <script src="../static/js/main.js"></script>
@@ -22,45 +23,38 @@
       <li id='signup-button' class="menu-li"><a href="/signup"> Signup</a></li>
       <li id='logout-button' class="menu-li"><a href="/logout"> Logout</a></li>
     </ul>
-    <!-- <ul class="nav">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Active</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" hrefx="#">Link</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-          </ul> -->
   </div>
-  <div class="content">
+  <div class="loading" id="loader" style="	
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100000000000;
+  overflow: hidden; 
+  opacity: 0.8;
+  display: none;
+  " >
+    <img src="/static/loading.gif" style="margin-left: auto; margin-right: auto;display:block;" >
+  </div>
+  <div class="content" style="margin-top: 5rem;">
 
-    <!-- <div class="uploadfile" id="image1">
-        <form action="">
-            <label >Browser file</label>
-            <input id="upload" type="file" accept=".jpg, .jpeg,.png" onchange="return fileValidation()"><br/>
-
-        </form>
-
-        
-
+    <!-- <div id="user-info">
+      <h3 id='user-name' style="font-size: 2vw;">Hi {{g.name}}</h3>
+      <h3 style="display: inline;font-size: 2vw;">Your signature is </h3>
+      <h3 id='signature' style="display: inline;font-size: 2vw;">{{g.signature}}</h3>
     </div> -->
 
-    <div id="user-info">
-      <h3 id='user-name'>Hi {{g.name}}</h3>
-      <h3 style="display: inline;">Your signature is </h3>
-      <h3 id='signature' style="display: inline;">{{g.signature}}</h3>
-    </div>
-
     <div class="file-upload">
-      <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
-        Image</button>
-
+      <!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+        Image</button> -->
+        <p class="watermark" id="sign" style="display: inline;">Your sign :</p>
+        <p class="watermark" id="signature" style="display: inline;">{{g.signature}}</p>
       <div class="image-upload-wrap">
-        <input id='file-input' class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
+        <input id='file-input' class="file-upload-input" type='file' onchange="readURL(this);" accept=".png,.jpg,.jpeg" />
         <div class="drag-text">
-          <h3>Drag and drop a file or select add Image</h3>
+          <h3>Drag and drop a file or click to add Image</h3>
         </div>
       </div>
       <div class="file-upload-content">
@@ -77,7 +71,7 @@
     <div class="file-output">
       <!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button> -->
 
-      <p class="watermark"> Watermarked Image: </p>
+      <p class="watermark" id="result" style="display: inline;"> Signature is : </p>
       <div id = 'output-image-placeholder' class="image-output-wrap">
         <div class="drag-text">
           <h3>Output image </h3>
@@ -87,7 +81,7 @@
         <img id="result-image" class="file-output-image" src="#" alt="your image" />
         <div class="image-title-wrap">
           <button type="button" onclick="removeOutput()" class="remove-image">Remove <span
-              class="image-title-out">Uploaded Image</span></button>
+              class="image-title-out">Output</span></button>
         </div>
       </div>
     </div>
@@ -95,19 +89,15 @@
     <div class="hi">
       <button class="watermark-btn" type="button" onclick="watermarkImage()"> Watermark </button>
     </div>
-    <div class="hi" style="text-align: center;">
-      <button class="un-watermark-btn" type="button" onclick="getSignatureFromImage()">UnWatermark </button>
+    <div class="hi" >
+      <button class="watermark-btn" type="button" onclick="getSignatureFromImage()">UnWatermark </button>
     </div>
 
     <div id="showimage">
 
     </div>
 
-    <div class="output">
-      <div>
-        <!-- <span style="font-weight: bold;"> Output</span> -->
-      </div>
-    </div>
+
 
 
 

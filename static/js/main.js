@@ -44,7 +44,6 @@ async function watermarkImage() {
         alert("You must upload the image");
         return;
     }
-
     console.log('water marking image')
     console.log('signature ' + document.getElementById('signature').textContent);
 
@@ -57,6 +56,7 @@ async function watermarkImage() {
     if (signature.length != 25) {
         alert("signature length must be 25 character");
     } else {
+        $('.loading').show();
         await fetch('/watermark', {
             method: 'POST',
             headers: {
@@ -69,6 +69,7 @@ async function watermarkImage() {
         })
             .then(response => response.json())
             .then(data => {
+                $('.loading').hide();
                 console.log(data);
                 if (data.result == 'Image was had sign') {
                     alert('Image already had a sign. Please try another');
@@ -76,6 +77,7 @@ async function watermarkImage() {
                 }
                 resultImage = data.result;
                 displayResultImage();
+                document.getElementById('result').innerHTML ="Signature is : ";
             });
     }
 }
@@ -117,6 +119,7 @@ async function getSignatureFromImage() {
         alert("You must upload the image");
         return;
     } else {
+        $('.loading').show();
         await fetch('/signature', {
             method: 'POST',
             headers: {
@@ -126,11 +129,14 @@ async function getSignatureFromImage() {
                 base64: img.slice(subLen).toString()
             })
         })
-            .then(function(response){
-                if(response.ok){
-                    data = response.json();
-                    console.log('your signature is  ' +  data.result);
-                }else{
+            .then(function (response) {
+                $('.loading').hide();
+                if (response.ok) {
+                    response.json().then(data => {
+                        console.log('your signature is  ' + data.result);
+                        document.getElementById('result').innerHTML ="Signature is : "+ data.result
+                    });
+                } else {
                     alert("This image doesn't have signature.");
                 }
             })
@@ -165,6 +171,8 @@ function removeUpload() {
     $('.file-upload-content').hide();
     $('.image-upload-wrap').show();
     $('.file-upload-input').val("");
+    img=null;
+    document.getElementById('result').innerHTML ="Signature is : ";
 }
 
 $('.image-upload-wrap').bind('dragover', function () {
@@ -174,6 +182,11 @@ $('.image-upload-wrap').bind('dragover', function () {
 $('.image-upload-wrap').bind('dragleave', function () {
     $('.image-upload-wrap').removeClass('image-dropping');
 });
+
+function removeOutput(){
+    $('.file-output-content').hide();
+    $('.image-output-wrap').show();
+}
 
 function checkLogIn() {
     let isLogIn = true;
@@ -190,5 +203,3 @@ function checkLogIn() {
         document.getElementById('logout-button').style.display = 'none';
     }
 }
-
-checkLogIn();
