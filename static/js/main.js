@@ -1,8 +1,7 @@
 let subLen = 0;
 let img = null;
 let resultImage = null;
-
-
+let filename="";
 function fileValidate() {
     var fileInput = document.getElementById("file-input");
     console.log(fileInput);
@@ -91,6 +90,16 @@ function displayResultImage() {
         console.log('updated result image');
     }
 }
+function saveImage( ) {
+    let link = document.createElement("a");
+    let filenames=filename+"_watermark";
+    document.body.appendChild(link); // for Firefox
+
+    link.setAttribute("href", resultImage);
+    console.log(filenames);
+    link.setAttribute("download", filenames);
+    link.click();
+}
 
 function readURL(input) {
     fileValidate();
@@ -105,8 +114,11 @@ function readURL(input) {
             $('.file-upload-content').show();
 
             $('.image-title').html(input.files[0].name);
-        };
+            filename=input.files[0].name;
+            filename=filename.substring(0,filename.lastIndexOf('.'));
+            console.log(filename);
 
+        };;
         reader.readAsDataURL(input.files[0]);
 
     } else {
