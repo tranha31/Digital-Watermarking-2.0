@@ -65,10 +65,10 @@ a{
   align-items: center;
 }
 .btn-gradient{
-  background-image: var(--gradient-color);
+  background-image: rgb(82, 189, 105);
 }
 .btn-gradient:hover{
-  background-image: var(--gradient-color-alt);
+  background-image: #1FB264;
 }
 .dots{
   font-size: 2.4rem;
@@ -80,10 +80,10 @@ a{
   cursor: pointer;
 }
 .btn-purple{
-  background-color: var(--purple-solid);
+  background-color: #1FB264;
 }
 .btn-purple:hover{
-  background-color: var(--purple-light);
+  background-color: rgb(82, 189, 105);
 }
 /*header style*/
 .header{
@@ -98,7 +98,7 @@ a{
   z-index: 999;
 }
 .header .active{
-  background-color: var(--purple-solid);
+  background-color: #1FB264;
 }
 /*nav*/
 .nav{
@@ -199,7 +199,7 @@ display: flex;
 }
 .quiet a{
   text-decoration: underline;
-  color: var(--purple-solid);
+  color: #1FB264;
 }
 .confirm-tos-container{
   /* margin-bottom: 20px; */
@@ -214,6 +214,6 @@ display: flex;
 }
 .link{
   text-decoration: underline;
-  color: var(--purple-solid);
+  color: #1FB264;
   letter-spacing: 1.5;
 }
