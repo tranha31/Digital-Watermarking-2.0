@@ -32,10 +32,10 @@ def hexToBinary(sign):
 
 def connect():
     db_config = {
-        'host': '127.0.0.1',
+        'host': 'localhost',
         'database': 'attt',
         'user': 'root',
-        'password': '123456'
+        'password': ''
     }
     conn = None
     try:
