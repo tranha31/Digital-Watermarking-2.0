@@ -13,9 +13,9 @@ app.secret_key = 'somesecretkeythatonlyishouldknow'
 
 api = Api(app)
 mydb = mysql.connector.connect(
-        host="127.0.0.1",
+        host="localhost",
         user="root",
-        password="123456",
+        password="",
         database="attt"
     )
 

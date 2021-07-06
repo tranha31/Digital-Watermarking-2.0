@@ -22,3 +22,4 @@ pip install -r requirement.txt
 ```
 python app.py
 ```
+- Run system in brower: 127.0.0.1:5000
