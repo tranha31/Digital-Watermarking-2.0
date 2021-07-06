@@ -1,0 +1,252 @@
+body {
+    font-family: sans-serif;
+    background-color: #eeeeee;
+  }
+  
+  .file-upload {
+    background-color: #ffffff;
+    width: 45%;
+    height: 80%;
+    margin: 0 auto;
+    float: left;
+    padding: 20px;
+  }
+  
+  .file-upload-btn {
+    width: 200px;
+    
+    margin: 0;
+    color: #fff;
+    background: #1FB264;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #15824B;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  
+  .file-upload-btn:hover {
+    background: #1AA059;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+  
+  .file-upload-btn:active {
+    border: 0;
+    transition: all .2s ease;
+  }
+  
+  .file-upload-content {
+    display: none;
+    text-align: center;
+  }
+  
+  .file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .image-upload-wrap {
+    margin-top: 20px;
+    border: 4px dashed #1FB264;
+    position: relative;
+  }
+  
+  .image-dropping,
+  .image-upload-wrap:hover {
+    background-color: #1FB264;
+    border: 4px dashed #ffffff;
+  }
+  
+  .image-title-wrap {
+    padding: 0 15px 15px 15px;
+    color: #222;
+  }
+  
+  .drag-text {
+    text-align: center;
+  }
+  
+  .drag-text h3 {
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #15824B;
+    padding: 100px 0;
+  }
+  
+  .file-upload-image {
+    max-height: 100%;
+    max-width: 100%;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .remove-image {
+    width: 200px;
+    margin: 0;
+    color: #fff;
+    background: #cd4535;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #b02818;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  
+  .remove-image:hover {
+    background: #c13b2a;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+  }
+  
+  .remove-image:active {
+    border: 0;
+    transition: all .2s ease;
+  }
+
+
+
+
+  .file-output{
+    background-color: #ffffff;
+    width: 45%;
+    height: 80%;
+    margin: 0 auto;
+    float: right;
+    padding: 20px;
+  }
+  .image-output-wrap{
+    margin-top: 20px;
+    border: 4px dashed #1FB264;
+    position: relative;
+  }
+  .watermark {
+      font-size: 1.3vw;
+      font-weight: bold;
+      padding: 10px;
+    }
+    .file-output-content{
+        display: none;
+        text-align: center;
+    }
+    .file-output-image{
+        max-height: 100%;
+        max-width: 100%;
+        margin: auto;
+        padding: 20px;
+    }
+    .watermark-btn{
+        width:7% ;
+        margin: 0;
+        color: #fff;
+        background: #1FB264;
+        border: none;
+        padding: 1px;
+        border-radius: 4px;
+        border-bottom: 4px solid #15824B;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 1.4rem;
+        white-space: nowrap;
+        overflow: hidden;
+
+
+    }
+
+    .watermark-btn:hover{
+      overflow: visible;
+      color: #222;
+    }
+    .un-watermark-btn{
+        width:7% ;
+        margin: 0 0;
+        color: #fff;
+        background: #1FB264;
+        border: none;
+        padding: 1px;
+        border-radius: 4px;
+        border-bottom: 4px solid #15824B;
+        transition: all .2s ease;
+        outline: none;
+        text-transform: uppercase;
+        font-weight: 400;
+        font-size: 1.4rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .hi{
+        margin: auto;
+        text-align: center;
+        padding: 4rem 0;
+    }
+    .menu{
+        background-color: rgb(82, 189, 105);
+        height: max-content;
+        padding:6px ;
+         justify-content: flex-end;
+         display: flex;
+         padding: 0;
+    }
+    .menu-li{
+        display: inline; 
+        padding: 1rem;
+
+    }
+    .menu-li a{
+        font-size: 1.5rem;
+        text-decoration: none;
+        color: rgb(11, 20, 49);
+    }
+    .menu-li:hover{
+        background-color: rgb(30, 197, 142);
+    }
+
+     #logout{
+        display: none;
+    }
+
+    .loading{
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100000000000;
+      overflow: hidden; 
+      opacity: 0.8;
+      display: none;
+    }
+    @media screen and (max-width: 800px) {
+      .file-output, .file-upload  {
+        width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+      }
+      .watermark-btn{
+        width: 25%;
+      }
+      .watermark{
+        font-size: 4vw;
+      }
+    }
+  

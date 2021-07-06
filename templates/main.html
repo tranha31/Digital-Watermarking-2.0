@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="vn">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Main</title>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+  <link rel="stylesheet" href="/static/css/main.css">
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <script src="../static/js/main.js"></script>
+</head>
+
+
+
+<body>
+  <div class="header">
+    <ul id='button-header' class="menu">
+      <li id='login-button' class="menu-li"><a href="/login"> Login</a></li>
+      <li id='signup-button' class="menu-li"><a href="/signup"> Signup</a></li>
+      <li id='logout-button' class="menu-li"><a href="/logout"> Logout</a></li>
+    </ul>
+  </div>
+  <div class="loading" id="loader" >
+    <img src="/static/loading.gif" style="margin-left: auto; margin-right: auto;display:block;" >
+  </div>
+  <div class="content" style="margin-top: 5rem;">
+
+    <!-- <div id="user-info">
+      <h3 id='user-name' style="font-size: 2vw;">Hi {{g.name}}</h3>
+      <h3 style="display: inline;font-size: 2vw;">Your signature is </h3>
+      <h3 id='signature' style="display: inline;font-size: 2vw;">{{g.signature}}</h3>
+    </div> -->
+
+    <div class="file-upload">
+      <!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add
+        Image</button> -->
+        <p class="watermark" id="sign" style="display: inline;">Your sign :</p>
+        <p class="watermark" id="signature" style="display: inline;">{{g.signature}}</p>
+      <div class="image-upload-wrap">
+        <input id='file-input' class="file-upload-input" type='file' onchange="readURL(this);" accept=".png,.jpg,.jpeg" />
+        <div class="drag-text">
+          <h3>Drag and drop a file or click to add Image</h3>
+        </div>
+      </div>
+      <div class="file-upload-content">
+        <img class="file-upload-image" src="#" alt="your image" />
+        <div class="image-title-wrap">
+          <button type="button" onclick="removeUpload()" class="remove-image">Remove <span class="image-title">Uploaded
+              Image</span></button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="file-output">
+      <!-- <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button> -->
+
+      <p class="watermark" id="result" style="display: inline;"> Signature is : </p>
+      <div id = 'output-image-placeholder' class="image-output-wrap">
+        <div class="drag-text">
+          <h3>Output image </h3>
+        </div>
+      </div>
+      <div class="file-output-content" id='file-out-put-content'>
+        <img id="result-image" class="file-output-image" src="#" alt="your image" />
+        <div class="image-title-wrap">
+          <button type="button" onclick="removeOutput()" class="remove-image">Remove <span
+              class="image-title-out">Output</span></button>
+          <button type="button" onclick="saveImage()" class="remove-image">Dowload </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="hi">
+      <button class="watermark-btn" type="button" onclick="watermarkImage()"> Watermark </button>
+    </div>
+    <div class="hi" >
+      <button class="watermark-btn" type="button" onclick="getSignatureFromImage()">UnWatermark </button>
+    </div>
+
+    <div id="showimage">
+
+    </div>
+
+
+
+
+
+
+  </div>
+  <!-- <script>
+        function fileValidation(){
+            var fileInput = document.getElementById("upload");
+            var filePath = fileInput.value;
+            //console.log(filePath);
+            // var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+            // var image1 = /\.jpg$/i;
+            // var image2 = /\.jpeg$/i;
+            // var image3 = /\.png$/i;
+            // if(!allowedExtensions.exec(filePath)){
+            //     alert("Vui lòng upload các file có định dạng: .jpeg/.jpg/.png/.gif only.");
+            //     fileInput.value = "";
+            //     return false;
+            // }
+            // else{
+                // if(fileInput.files && fileInput.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function(e){
+                        document.getElementById("showimage").innerHTML = '<img id="picture" src="'+e.target.result+'"/>';
+                        
+                    }; 
+
+                // }
+            }
+        // }
+        
+        
+        
+    </script> -->
+
+
+  
+
+</body>
+
+</html>

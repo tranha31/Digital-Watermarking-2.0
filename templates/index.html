@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Log in</title>
+  <link rel="stylesheet" href="/static/css/index.css">
+</head>
+
+<body class="atlassian-brand">
+	<script type="text/javascript">
+		function hiddenErrorMessage(){
+			document.getElementById("error").remove();
+		}
+	</script>
+
+
+  <section class="sign-up">
+    <div class="container">
+      <div class="sign-up-center">
+        <div class="text-center">
+          <div class="signup-form boder-gray">
+
+            <h1 class="sub-heading">Log in to your account</h1>
+
+              <form id="login-form" action="/login" method="POST">
+                <div class="email-password">
+                  <input type="text" name="user" id="user" class="form-field u" placeholder="Enter email" inputmode="email" onclick="hiddenErrorMessage()">
+                  <input type="password" name="password" id="password" class="form-field u" placeholder="Enter password" onclick="hiddenErrorMessage()">
+                  <div class="text-center">
+                    <input id="login" type="submit" class="btn btn-purple form-btn" value="Log In">
+                  </div>
+                </div>
+                <div align="center" id="error" style="display: none">
+                  <p style="font-size: 20; color: #FF1C19;">User Name or Password invalid, please verify!</p>
+                  <p style="font-size: 20; color: #FF1C19;">Make sure you have activated your account</p>
+                </div>
+              </form>
+            <hr>
+
+            <div class="bottom-form-link">
+              <span><a class="forgotLink link" href="/" data-analytics-link="forgotPasswordLink">Get signature without log in?</a></span>
+              <br>
+              <span><a class="signupLink link" href="/signup" data-analytics-link="signUpLoginLink">Sign up for an account</a></span>
+            </div>
+          </div>
+          <div class="bottom-form-link smaller-links">
+            <span><a class="link" href="privacy.html" target="_blank" data-analytics-event="clickedLogInPrivacyLink">Privacy Policy</a></span>
+            <span><a  class="link"  href="legal.html" target="_blank" data-analytics-event="clickedLogInTOSLink">Terms of Service</a></span>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </section>
+  <footer class="global-footer">
+  </footer>
+</body>
+</html>
